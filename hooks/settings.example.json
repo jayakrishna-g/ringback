@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/workspace/venv/bin/python /workspace/ringback/hooks/claude_pretooluse.py",
+            "timeout": 600
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/workspace/venv/bin/python /workspace/ringback/hooks/claude_posttooluse.py",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}
