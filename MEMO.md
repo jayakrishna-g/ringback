@@ -38,7 +38,7 @@ answered in 0.6–2.3 s, fast enough to feel like a conversation.
 
 **Why Runta, and how it fits with Runta's governance:** Runta's controls are set before the
 run:
-* egress: which hosts the runtime can reach (in this case, only what it needs to work and to call people: OpenAI, Anthropic, Twilio and Runta);
+* egress: which hosts the runtime can reach;
 * secret rules: which keys it can use, and on which API paths;
 * capture: an independent record of every tool call.
 
