@@ -100,7 +100,7 @@ From the runtime's event log:
 | Claude Code phoning you itself: a question (`ringback ask`), or "done/failed" when the task ends (`ringback call`) | **Real**, unit-tested; the "done" call was not part of the recorded live run |
 | Approvals, inbox and audit log (SQLite) and the `ringback` CLI | **Real**, tested |
 | Runta: runtime, published HTTPS port, secret stubs for OpenAI **and** Anthropic, systemd services | **Real**, against a live account (see [FINDINGS.md](FINDINGS.md)) |
-| Checkpoint before an approved risky step (Runta API, path-scoped token, fail closed) | **Real**: checkpoint created from inside the runtime in 66.7 s; hook logic unit-tested. Not yet run on a live phone approval |
+| Checkpoint before an approved risky step (Runta API, path-scoped token, fail closed) | **Real**, tested on a live call (2026-11-17): phone "yes" at 09:14:25, checkpoint ready 48.1 s later, then the `DROP` ran. Runta's tool I/O capture shows the `DROP` after the checkpoint |
 | Egress allowlist (OpenAI, Anthropic, Twilio, Runta only) | **Real**, verified: other hosts time out, Claude Code still works |
 | Runta tool I/O capture of Claude Code's tool calls | **Real**, verified with `runta tokens analyze --runtime ringback` |
 | `demo/project`, the "production database" Claude Code migrates | **Demo data**: a 500-row SQLite file, but Claude Code really changes it |
@@ -204,8 +204,10 @@ step, and Runta's runtime isolation is the natural place for it.
 
 ## Known gaps
 
-* **Voicemail.** On the live test, the approval call first reached the owner's voicemail
-  greeting. Twilio answering-machine detection (`MachineDetection=Enable`, then drop the call
+* **Voicemail.** On both live tests, the approval call first reached the owner's voicemail
+  greeting. On the second, the line read the request to the greeting for about 70 s and
+  recorded no decision, then got the owner's "yes" once they picked up. But a stray "yes" in a
+  greeting could still count. Twilio answering-machine detection (`MachineDetection=Enable`, then drop the call
   when `AnsweredBy` is a machine) would close this, at a cost of about 3 s of setup per call.
 * **Caller ID can be spoofed,** and a caller turn proves *that* someone spoke, not *who*, or
   that they said yes. The model interprets the words. High-risk approvals should also need a
@@ -219,7 +221,7 @@ step, and Runta's runtime isolation is the natural place for it.
 * **The checkpoint token is full-account, only path-scoped.** The agent can't read it, and it
   only reaches checkpoint endpoints. But it isn't limited by HTTP method, so a compromised
   agent could delete a checkpoint. Runta has no token scopes yet.
-* **Checkpoints add time.** A checkpoint took 39–67 s, during which the approved command waits.
+* **Checkpoints add time.** A checkpoint took 39–67 s (48 s on the live rehearsal), during which the approved command waits.
   That's fine for a `DROP` but too slow to use on every command.
 * **Redaction is pattern-based.** It catches the usual credential shapes (`KEY=value`,
   `--password x`, `-pX` for mysql, `Bearer …`, known key formats). A secret in an unusual shape

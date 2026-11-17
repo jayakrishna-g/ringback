@@ -25,7 +25,7 @@ Each result below is something I ran and saw. Where I've drawn a conclusion from
 | **Egress allowlist** (`runta egress set --mode allowlist`) | With 4 hosts allowed: `example.com` and `pypi.org` time out. The allowed APIs return 200 (stubs still inject). `127.0.0.1` is unaffected. Claude Code runs with `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1`. |
 | **LLM tool I/O capture** (`--llm-tool-io-capture`) | `runta tokens analyze --runtime <rt>` lists each Claude Code tool call: command, output, `tool_call_id`, timestamp. A failed `sqlite3: command not found` was recorded too. |
 | **Path-scoped secret rules** | With rules only on `/v2/runtimes/*/checkpoints` and `/v2/checkpoints/*`, the runtime can create and poll checkpoints, but `GET /v2/runtimes` and `/v2/secrets` get `403 Unauthenticated` |
-| **Live checkpoint** | Ready in 39.3 s, created from my laptop, and 66.7 s, created from inside the runtime through the stub. The runtime kept serving `/health` afterwards. |
+| **Live checkpoint** | Ready in 39.3 s, created from my laptop, and 66.7 s, created from inside the runtime through the stub. On the full phone rehearsal (2026-11-17), it was ready 48.1 s after the spoken "yes", and the approved `DROP` ran right after. The runtime kept serving `/health` and the live call throughout. |
 
 ## Gets in the way
 
