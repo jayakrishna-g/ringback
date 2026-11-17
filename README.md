@@ -104,7 +104,6 @@ From the runtime's event log:
 | Egress allowlist (OpenAI, Anthropic, Twilio, Runta only) | **Real**, verified: other hosts time out, Claude Code still works |
 | Runta tool I/O capture of Claude Code's tool calls | **Real**, verified with `runta tokens analyze --runtime ringback` |
 | `demo/project`, the "production database" Claude Code migrates | **Demo data**: a 500-row SQLite file, but Claude Code really changes it |
-| `demo/worker.py`, a scripted agent with no LLM | **Mocked work** (sleeps and logs); kept as a cheap way to test the approval call |
 | Waking a suspended runtime when a call comes in | **Not working**: traffic didn't wake it, and an explicit resume took about 20 s |
 | Detecting voicemail on approval calls | **Not built**: if voicemail answers, a stray "yes" in the recording could count as approval (see Known gaps) |
 
@@ -248,7 +247,6 @@ ringback/twilio.py   signature check, TwiML, outbound call
 ringback/cli.py      `ringback` command for agents
 hooks/               Claude Code PreToolUse (phone approval, then checkpoint) + PostToolUse (progress, phone instructions)
 demo/project/        the repo Claude Code works on (SQLite users DB, MIGRATION.md)
-demo/worker.py       scripted agent without an LLM
 scripts/deploy.py    Runta deploy (SDK + CLI)
 scripts/simulate_call.py  Twilio stand-in for testing without a phone
 tests/               fakes for both websockets and for `claude`; no network

@@ -131,16 +131,6 @@ class Store:
             for r in reversed(rows)
         ]
 
-    def caller_transcript(self, call_sid: str, limit: int = 4) -> list[str]:
-        """Last things the caller said on this call, as transcribed (not as the model paraphrased)."""
-        with self._conn() as c:
-            rows = c.execute(
-                "SELECT message FROM events WHERE kind='caller_said' AND json_extract(data, '$.call_sid')=? "
-                "ORDER BY id DESC LIMIT ?",
-                (call_sid, limit),
-            ).fetchall()
-        return [r[0] for r in reversed(rows)]
-
     # ---- approvals -------------------------------------------------------
     def request_approval(self, question: str, context: str = "") -> Approval:
         # It's read aloud and stored. Say so if anything was hidden, so the owner knows.

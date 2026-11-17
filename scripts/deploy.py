@@ -1,7 +1,6 @@
 """Deploy ringback onto a Runta runtime.
 
   python scripts/deploy.py up        create/refresh runtime, upload, start, point Twilio at it
-  python scripts/deploy.py worker    start the mocked demo agent inside the runtime
   python scripts/deploy.py claude "<task>"   start Claude Code on a task (same as asking by phone)
   python scripts/deploy.py reset-project     reseed the demo project Claude Code works on
   python scripts/deploy.py probe     measure cold-wake latency: wait for suspend, then time /health
@@ -327,14 +326,6 @@ def up() -> None:
     print(f"Agent CLI from your laptop:\n  export RINGBACK_URL={public_url} RINGBACK_AGENT_TOKEN={agent_token}")
 
 
-def worker() -> None:
-    rt = sdk().runtimes.get(NAME)
-    remote_exec(rt, "systemctl reset-failed ringback-worker >/dev/null 2>&1; "
-                    f"systemd-run --unit ringback-worker --working-directory {REMOTE} "
-                    f"--property EnvironmentFile={REMOTE}/runtime.env {VENV}/bin/python demo/worker.py")
-    print("demo worker started (unit ringback-worker); it phones the owner at the destructive step")
-
-
 def claude_task() -> None:
     task = " ".join(sys.argv[2:]).strip()
     if not task:
@@ -356,7 +347,6 @@ def reset_project() -> None:
 def logs() -> None:
     rt = sdk().runtimes.get(NAME)
     print(remote_exec(rt, "journalctl -u ringback --no-pager -n 60; echo ---; "
-                          "journalctl -u ringback-worker --no-pager -n 30 || true; echo ---; "
                           "journalctl -u claude-task --no-pager -n 30 || true"))
 
 
@@ -443,7 +433,7 @@ def down() -> None:
 
 
 if __name__ == "__main__":
-    cmds = {"up": up, "worker": worker, "claude": claude_task, "reset-project": reset_project,
+    cmds = {"up": up, "claude": claude_task, "reset-project": reset_project,
             "logs": logs, "probe": probe, "down": down}
     if len(sys.argv) < 2 or sys.argv[1] not in cmds:
         sys.exit(__doc__)
