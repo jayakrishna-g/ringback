@@ -211,6 +211,10 @@ step, and Runta's runtime isolation is the natural place for it.
 * **Caller ID can be spoofed,** and a caller turn proves *that* someone spoke, not *who*, or
   that they said yes. The model interprets the words. High-risk approvals should also need a
   PIN, or keypad (DTMF) confirmation.
+* **"Only a clear yes" is enforced in the voice model's instructions, not in code.** On the
+  recorded run ([docs/calls](docs/calls/README.md)), a task started on "Mhm." while the model
+  reported "Yes, go ahead." The log keeps both, so it's visible after the fact. Next fix: check
+  the recognised words at decision time, and ask again when they aren't a clear yes.
 * **Replay protection is in memory.** A server restart forgets which CallSids already had a
   stream. Replaying also requires capturing a signed request, which travels over TLS.
 * **Phone instructions aren't acknowledged.** If a hook dies after taking an instruction but
@@ -251,4 +255,5 @@ scripts/deploy.py    Runta deploy (SDK + CLI)
 scripts/simulate_call.py  Twilio stand-in for testing without a phone
 tests/               fakes for both websockets and for `claude`; no network
 docs/ringback_demo_deck.html  the demo video's slide deck (self-contained; open it in a browser)
+docs/calls/          captioned recordings of one end-to-end run, with the server's log
 ```
