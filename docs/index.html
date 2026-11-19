@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ringback demo</title>
+<meta name="description" content="ringback: a coding agent on a Runta runtime that keeps working in the background and phones you when it needs you. Demo video and three recorded calls.">
+<style>
+  :root {
+    --ink: #14181F; --ink2: #1F2633; --paper: #F5F3EE; --muted: #B3BCC8;
+    --accent: #E8843A; --line: #39414F;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ink); color: var(--paper);
+    font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 1080px; margin: 0 auto; padding: 56px 16px 80px; }
+  .eyebrow { font: 600 13px/1 ui-monospace, "JetBrains Mono", Menlo, Consolas, monospace; letter-spacing: .18em;
+             text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+  h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1; margin: 0 0 16px; letter-spacing: -.02em; }
+  h2 { font-size: 26px; margin: 56px 0 6px; }
+  .lede { color: var(--muted); font-size: 20px; max-width: 760px; margin: 0 0 22px; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  .links a { display: inline-block; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px;
+             color: var(--paper); text-decoration: none; font-size: 15px; }
+  .links a:hover { border-color: var(--accent); color: var(--accent); }
+  .sub { color: var(--muted); margin: 0 0 18px; }
+  .frame { position: relative; width: 100%; aspect-ratio: 1280 / 851; border-radius: 14px; overflow: hidden;
+           background: var(--ink2); border: 1px solid var(--line); }
+  .frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .calls { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .call { background: var(--ink2); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; scroll-margin-top: 24px; }
+  .call video { display: block; width: 100%; aspect-ratio: 1 / 1; background: #000; }
+  .call .body { padding: 14px 16px 18px; }
+  .call h3 { margin: 0 0 4px; font-size: 18px; }
+  .call p { margin: 0; color: var(--muted); font-size: 15px; }
+  .call .dl { display: inline-block; margin-top: 10px; color: var(--accent); font-size: 14px; }
+  .note { margin-top: 28px; padding: 16px 18px; border-left: 4px solid var(--accent); background: var(--ink2);
+          border-radius: 0 10px 10px 0; color: var(--muted); }
+  .note b { color: var(--paper); }
+  a { color: var(--accent); }
+  footer { margin-top: 64px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding-top: 18px; }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Runta take-home · demo</p>
+  <h1>ringback</h1>
+  <p class="lede">Claude Code keeps working in the background on a Runta runtime, and phones you when it needs you: before a risky command, when it’s stuck on a decision, and when it’s done.</p>
+  <ul class="links">
+    <li><a href="https://github.com/jayakrishna-g/ringback">Code on GitHub</a></li>
+    <li><a href="https://github.com/jayakrishna-g/ringback/blob/main/MEMO.pdf">Memo (PDF)</a></li>
+    <li><a href="https://github.com/jayakrishna-g/ringback/blob/main/FINDINGS.md">Runta findings</a></li>
+    <li><a href="https://cursorful.com/share/5XEEtgLzZY9b">Video on Cursorful</a></li>
+  </ul>
+
+  <h2 id="video">Demo video</h2>
+  <p class="sub">A walkthrough of the idea, how it works, and how it fits with Runta’s controls.</p>
+  <div class="frame">
+    <iframe src="https://cursorful.com/embed/5XEEtgLzZY9b" title="ringback demo video" loading="lazy"
+            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+  </div>
+
+  <h2 id="calls">Three real calls from one run</h2>
+  <p class="sub">Recorded on the owner’s phone on 18 Nov 2026, captioned from the server’s log. Press play for sound.</p>
+  <div class="calls">
+    <article class="call" id="call-1">
+      <video controls preload="metadata" playsinline poster="calls/call-1-start-task.jpg">
+        <source src="calls/call-1-start-task.mp4" type="video/mp4">
+      </video>
+      <div class="body">
+        <h3>1 · Owner starts a task</h3>
+        <p>The owner asks for the migration. The line reads it back and starts Claude Code. 0:30</p>
+        <a class="dl" href="calls/call-1-start-task.mp4">Download MP4</a>
+      </div>
+    </article>
+    <article class="call" id="call-2">
+      <video controls preload="metadata" playsinline poster="calls/call-2-approval.jpg">
+        <source src="calls/call-2-approval.mp4" type="video/mp4">
+      </video>
+      <div class="body">
+        <h3>2 · It asks before the DROP</h3>
+        <p>A hook holds <code>DROP COLUMN</code> and phones the owner, who asks what it will run, then approves. 0:50</p>
+        <a class="dl" href="calls/call-2-approval.mp4">Download MP4</a>
+      </div>
+    </article>
+    <article class="call" id="call-3">
+      <video controls preload="metadata" playsinline poster="calls/call-3-done.jpg">
+        <source src="calls/call-3-done.mp4" type="video/mp4">
+      </video>
+      <div class="body">
+        <h3>3 · It calls back when done</h3>
+        <p>A summary of the finished migration, including what isn’t committed yet. 0:32</p>
+        <a class="dl" href="calls/call-3-done.mp4">Download MP4</a>
+      </div>
+    </article>
+  </div>
+
+  <div class="note">
+    <b>One honest detail.</b> In call 1, the task started on a “Mhm.” while the voice model reported “Yes, go ahead.”
+    The server logged both side by side, which is why it keeps the real transcript.
+    <a href="https://github.com/jayakrishna-g/ringback/blob/main/docs/SECURITY.md">Known gaps</a> has the fix.
+    Transcripts and the matching server log are in <a href="https://github.com/jayakrishna-g/ringback/blob/main/docs/calls/README.md">docs/calls</a>.
+  </div>
+
+  <footer>ringback · built on <a href="https://runta.com">Runta</a> with Claude Code, Twilio and OpenAI Realtime.</footer>
+</main>
+</body>
+</html>

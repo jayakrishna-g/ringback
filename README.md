@@ -2,7 +2,9 @@
 
 **A coding agent that keeps working in the background, and phones you when it needs you.**
 
-**[Demo video](https://cursorful.com/share/5XEEtgLzZY9b)** · [Memo (PDF)](MEMO.pdf) · [Recorded calls](docs/calls/README.md) · [Runta findings](FINDINGS.md)
+**[Demo page](https://jayakrishna-g.github.io/ringback/)** · [Demo video](https://cursorful.com/share/5XEEtgLzZY9b) · [Memo (PDF)](MEMO.pdf) · [Recorded calls](docs/calls/README.md) · [Runta findings](FINDINGS.md)
+
+<a href="https://jayakrishna-g.github.io/ringback/#video"><img src="docs/media/demo-video.jpg" alt="Play the ringback demo video" width="560"></a>
 
 ringback runs Claude Code on a [Runta](https://runta.com) runtime and gives it a phone number.
 You give it work by phone, hang up, and get on with your day. It calls you only when it needs you:
@@ -16,13 +18,15 @@ You can also call it any time to start a task, ask what it's doing, or redirect 
 
 ## Hear it: three real calls from one run
 
-| Call | What happens | Length |
-|---|---|---|
-| [1 · Owner starts a task](https://github.com/jayakrishna-g/ringback/blob/main/docs/calls/call-1-start-task.mp4) | The owner asks for the migration; the line reads it back and starts Claude Code | 0:30 |
-| [2 · It asks before the DROP](https://github.com/jayakrishna-g/ringback/blob/main/docs/calls/call-2-approval.mp4) | It calls before `DROP COLUMN`; the owner asks what it will run, then approves | 0:50 |
-| [3 · It calls back when done](https://github.com/jayakrishna-g/ringback/blob/main/docs/calls/call-3-done.mp4) | A summary, including what isn't committed yet | 0:32 |
+<table>
+<tr>
+<td align="center" width="33%"><a href="https://jayakrishna-g.github.io/ringback/#call-1"><img src="docs/media/call-1-start-task-thumb.jpg" alt="Play call 1: owner starts a task" width="240"></a><br><b>1 · Owner starts a task</b><br>Read back, then Claude Code starts · 0:30</td>
+<td align="center" width="33%"><a href="https://jayakrishna-g.github.io/ringback/#call-2"><img src="docs/media/call-2-approval-thumb.jpg" alt="Play call 2: it asks before the DROP" width="240"></a><br><b>2 · It asks before the DROP</b><br>The owner asks what it will run, then approves · 0:50</td>
+<td align="center" width="33%"><a href="https://jayakrishna-g.github.io/ringback/#call-3"><img src="docs/media/call-3-done-thumb.jpg" alt="Play call 3: it calls back when done" width="240"></a><br><b>3 · It calls back when done</b><br>A summary, including what isn't committed · 0:32</td>
+</tr>
+</table>
 
-Captioned recordings from 18 Nov 2026. [docs/calls](docs/calls/README.md) has the transcripts and the server's log for the same run.
+Click a call to play it with sound on the [demo page](https://jayakrishna-g.github.io/ringback/#calls). Captioned recordings from 18 Nov 2026; [docs/calls](docs/calls/README.md) has the MP4s, transcripts and the server's log for the same run.
 
 ## How it fits with Runta
 
@@ -47,6 +51,7 @@ follow [docs/SETUP.md](docs/SETUP.md).
 
 | Doc | What's in it |
 |---|---|
+| [Demo page](https://jayakrishna-g.github.io/ringback/) | The demo video and the three recorded calls, playable in the browser |
 | [MEMO.pdf](MEMO.pdf) | The 2-page report: what, why, evidence, what I cut |
 | [docs/SETUP.md](docs/SETUP.md) | Full setup, testing it by phone, operating it, using the CLI from other agents |
 | [docs/DESIGN.md](docs/DESIGN.md) | Architecture, why Runta, how Claude Code runs, what's real vs mocked, file layout |
