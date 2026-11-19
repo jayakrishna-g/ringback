@@ -2,7 +2,7 @@
 
 Runs inside the runtime. The request carries no token: a Runta secret stub on
 api.runta.com injects it, so the token never exists inside the runtime.
-(Trade-off: anything in the runtime can use that stub, including the agent; see README.)
+(Trade-off: anything in the runtime can use that stub, including the agent; see docs/SECURITY.md.)
 """
 
 from __future__ import annotations

@@ -91,7 +91,7 @@ def create_app(
     live_calls: list[CallSession] = []  # owner calls in progress
     # Each Twilio CallSid gets one stream token, ever. A retry before the stream starts gets the
     # same token back (idempotent); once used or expired, a replay gets nothing. In memory only:
-    # a restart forgets, which the README notes.
+    # a restart forgets, which docs/SECURITY.md notes.
     issued: dict[str, str] = {}  # CallSid -> token
     app.state.store = store
     app.state.stream_tokens = stream_tokens

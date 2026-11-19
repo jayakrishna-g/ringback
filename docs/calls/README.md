@@ -27,7 +27,7 @@ In call 1, the turn that started the task was a **"Mhm."** The voice model repor
 owner's words as "Yes, go ahead." The server logged the speech recogniser's "Mhm." right next
 to the model's account, which is why it keeps both. Today, "only a clear yes" is enforced in the
 voice model's instructions. Checking the recognised words in code, and asking again when they
-aren't a clear yes, is the next fix. See "Known gaps" in the main README.
+aren't a clear yes, is the next fix. See "Known gaps" in [SECURITY.md](../SECURITY.md).
 
 The phone's own "This call will be recorded" announcement also reached the line as a caller
 turn. It was harmless here, because a turn alone never approves anything that came after it.

@@ -43,7 +43,7 @@ PORT = 8080
 IDLE_SECS = int(os.environ.get("RINGBACK_IDLE_SECS", "0"))
 OPENAI_SECRET = "ringback-openai"
 ANTHROPIC_SECRET = "ringback-anthropic"
-RUNTA_SECRET = "ringback-runta"  # you add its value via `runta secret authorize` (see README)
+RUNTA_SECRET = "ringback-runta"  # you add its value via `runta secret authorize` (see docs/SETUP.md)
 # Only checkpoint endpoints get the Runta token. A rule path must start with "/" and `*` matches
 # one path segment, so each endpoint needs its own rule: create, then poll until ready.
 CHECKPOINT_PATHS = ["/v2/runtimes/*/checkpoints", "/v2/checkpoints/*"]
