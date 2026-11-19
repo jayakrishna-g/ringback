@@ -1,5 +1,7 @@
 # ringback: a background agent that phones you when it needs you
 
+Code: [github.com/jayakrishna-g/ringback](https://github.com/jayakrishna-g/ringback) · Video: [cursorful.com/share/5XEEtgLzZY9b](https://cursorful.com/share/5XEEtgLzZY9b)
+
 ## What to build
 
 A coding agent that keeps working in a Runta runtime after you walk away, and **calls your

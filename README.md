@@ -2,6 +2,8 @@
 
 **A coding agent that keeps working in the background, and phones you when it needs you.**
 
+**[Demo video](https://cursorful.com/share/5XEEtgLzZY9b)** · [Memo (PDF)](MEMO.pdf) · [Recorded calls](docs/calls/README.md) · [Runta findings](FINDINGS.md)
+
 ringback runs Claude Code on a [Runta](https://runta.com) runtime and gives it a phone number.
 You give it work by phone, hang up, and get on with your day. It works on its own and calls
 you only when it needs you:
