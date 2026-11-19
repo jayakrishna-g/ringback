@@ -250,4 +250,5 @@ demo/project/        the repo Claude Code works on (SQLite users DB, MIGRATION.m
 scripts/deploy.py    Runta deploy (SDK + CLI)
 scripts/simulate_call.py  Twilio stand-in for testing without a phone
 tests/               fakes for both websockets and for `claude`; no network
+docs/ringback_demo_deck.html  the demo video's slide deck (self-contained; open it in a browser)
 ```
