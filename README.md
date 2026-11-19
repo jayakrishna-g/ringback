@@ -20,6 +20,16 @@ changelog"). If you're already on the line, it asks there instead of ringing a b
 Every decision is recorded with the caller's number, the Twilio CallSid, and the words the
 speech recogniser heard.
 
+## Hear it: three real calls from one run
+
+| Call | What happens | Length |
+|---|---|---|
+| [1 · Owner starts a task](https://github.com/jayakrishna-g/ringback/blob/main/docs/calls/call-1-start-task.mp4) | The owner asks for the migration; the line reads it back and starts Claude Code | 0:30 |
+| [2 · It asks before the DROP](https://github.com/jayakrishna-g/ringback/blob/main/docs/calls/call-2-approval.mp4) | It calls before `DROP COLUMN`; the owner asks what it will run, then approves | 0:50 |
+| [3 · It calls back when done](https://github.com/jayakrishna-g/ringback/blob/main/docs/calls/call-3-done.mp4) | A summary, including what isn't committed yet | 0:32 |
+
+Captioned recordings from 18 Nov 2026. [docs/calls](docs/calls/README.md) has the transcripts and the server's log for the same run.
+
 ## Quickstart for evaluators
 
 **1. Without any accounts (2 minutes): run the tests.**
